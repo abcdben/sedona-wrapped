@@ -1,0 +1,24 @@
+# Virtual environment
+venv/
+
+# Data files
+sedona_data/
+downloaded_documents/
+westlawresults/
+*.json
+*.xlsx
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Python scripts (data pipeline, not needed for site)
+*.py
+
+# Generated assets
+*.pdf
+download_progress.json
+classification_log.txt
+
+# OS files
+.DS_Store
