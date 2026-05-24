@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0FKP9BN1W"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T0FKP9BN1W');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Sedona Conference: 2000–2025 Wrapped</title>
@@ -507,8 +515,8 @@
         }
         
         .methodology-section .section-title {
-            font-size: 0.65rem;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
             letter-spacing: 0.5px;
         }
         
@@ -558,17 +566,17 @@
         }
         
         .step-content h4 {
-            font-size: 0.68rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-secondary);
             margin: 0 0 0.3rem 0;
         }
-        
+
         .step-content > p {
-            font-size: 0.62rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             margin: 0 0 0.5rem 0;
-            line-height: 1.5;
+            line-height: 1.55;
         }
         
         .step-details {
@@ -844,59 +852,10 @@
             </div>
             
             <div class="card card-full methodology-card">
-                <div class="process-steps-list">
-                    
-                    <div class="process-step-item">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Data Collection</h4>
-                            <p>Citation data was gathered from three complementary legal research sources. <strong>CourtListener/RECAP</strong> provided federal court filings via their public REST API. We queried for documents containing "Sedona" references and downloaded 2,290 PDF documents from the RECAP archive. <strong>Westlaw</strong> exports supplied judicial opinions, trial court briefs, and expert materials in structured CSV format, totaling over 2,200 records with associated case metadata. Finally, <strong>SSRN</strong> (Social Science Research Network) provided 139 academic papers and legal scholarship through API queries, including abstracts and publication metadata.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step-item">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Text Extraction</h4>
-                            <p>Documents were converted into machine-readable text for analysis. PDF court filings were processed using PyMuPDF for text extraction, with OCR (optical character recognition) applied as a fallback for scanned documents. Text was then normalized to handle encoding variations and remove formatting artifacts. Metadata fields (including filing dates, court names, case numbers, judge names, and author information) were parsed and standardized across all sources.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step-item">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>AI Classification</h4>
-                            <p>Each document was analyzed using large language models (Claude and GPT-4) to identify and categorize citations. The system first identified passages containing "Sedona" mentions and extracted surrounding context (typically 500-1000 characters). This context was then sent to the LLM with structured prompts to determine: the specific Sedona publication being cited, any principle numbers referenced (for Sedona Principles citations), and the nature of the citation. The LLM returned structured JSON responses mapping each citation to one of 18 publication categories corresponding to Sedona's major works.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step-item">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Data Aggregation</h4>
-                            <p>Classified results from all sources were merged into a unified dataset for analysis. Fields from each source (RECAP, Westlaw, SSRN) were mapped to a common schema with consistent naming conventions. Duplicate citations appearing across multiple sources were identified and merged using case numbers and document titles. Publications were mapped to their corresponding Sedona Conference Working Groups (WG1-WG13), and date formats were standardized to enable temporal analysis.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step-item">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>Visualization</h4>
-                            <p>The final dataset was transformed into this interactive dashboard using Python for data processing and Plotly.js for visualization. Citations were aggregated by year, quarter, publication, court, and other dimensions. The resulting charts (including stacked bar charts, area charts, and cumulative growth curves) were compiled into a single-page HTML document with embedded data and responsive styling for accessibility across devices.</p>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-                <div class="methodology-note">
-                    <h4>Limitations</h4>
-                    <p>
-                        This analysis captures citations available through the searched databases and may not represent 
-                        all Sedona Conference citations in existence. Classification accuracy depends on document quality 
-                        and clarity of citation context.
-                    </p>
-                </div>
-                
+                <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 0.75rem 0;">
+                    This analysis draws from major U.S. legal and academic databases. It does not capture citations from state courts with limited digital indexing, international jurisdictions, or unindexed filings, and therefore represents a conservative sample of The Sedona Conference's full impact.
+                </p>
+                <button onclick="document.getElementById('process-modal').classList.add('active'); document.body.style.overflow='hidden';" style="padding: 0.45rem 1.1rem; font-size: 0.7rem; border: 1px solid var(--accent-sage); background: transparent; color: var(--accent-sage); border-radius: 4px; cursor: pointer; transition: all 0.2s;">View Expanded Process</button>
             </div>
         </div>
         
@@ -931,9 +890,120 @@
         </div>
     </div>
     
+    <!-- Process Modal -->
+    <div class="modal-overlay" id="process-modal">
+        <div class="modal" style="max-width: 750px;">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title">Data Collection &amp; Analysis Process</div>
+                    <div class="modal-subtitle">Step-by-step pipeline for building this dashboard</div>
+                </div>
+                <button class="modal-close" onclick="document.getElementById('process-modal').classList.remove('active'); document.body.style.overflow='';">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem 1.5rem;">
+                <div style="margin-bottom: 1.25rem;">
+                    <h4 style="font-size: 0.7rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 0.5rem 0;">Source Data</h4>
+                    <table id="source-breakdown-table" style="width: 100%; border-collapse: collapse; font-size: 0.7rem;"></table>
+                </div>
+                <h4 style="font-size: 0.7rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 0.75rem 0;">Pipeline Steps</h4>
+                <div class="process-steps-list">
+
+                    <div class="process-step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Query CourtListener / RECAP</h4>
+                            <p>Searched the CourtListener REST API and RECAP archive for federal court filings containing references to Sedona Conference publications. Downloaded 2,290+ PDF documents including motions, briefs, and memoranda.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Export Westlaw Results</h4>
+                            <p>Exported judicial opinions, trial court briefs, and expert materials referencing Sedona publications from Westlaw in structured CSV format, totaling over 2,200 records with associated case metadata.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Query Academic Databases</h4>
+                            <p>Searched SSRN (Social Science Research Network) and Google Scholar for academic papers and legal scholarship referencing "Sedona," returning 1,045 initial results with abstracts and publication metadata.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Extract &amp; Normalize Text</h4>
+                            <p>Converted PDF court filings into machine-readable text using PyMuPDF, with OCR as a fallback for scanned documents. Parsed and standardized metadata fields (filing dates, court names, case numbers, judge names) across all sources.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Classify Citations by Publication</h4>
+                            <p>Used keyword and pattern matching to identify which specific Sedona publication each citation references (e.g., Sedona Principles, Cooperation Proclamation, Commentary on Legal Holds) across 18 publication categories.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>AI Reclassification of Ambiguous Citations</h4>
+                            <p>For citations where keyword matching was insufficient, used large language models (Claude) to analyze document excerpts and determine the specific publication from context. The LLM returned structured JSON responses mapping each ambiguous citation to the correct category.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">7</div>
+                        <div class="step-content">
+                            <h4>AI Classification of Academic Paper Domains</h4>
+                            <p>Used a two-pass LLM approach: first, Claude analyzed a sample of paper titles to organically develop meaningful domain categories; then it batch-classified all 268 verified papers into those categories based on titles and abstracts.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">8</div>
+                        <div class="step-content">
+                            <h4>Normalize &amp; Merge Across Sources</h4>
+                            <p>Mapped fields from CourtListener, Westlaw, and SSRN to a common schema with consistent naming conventions. Standardized date formats, court names, and document type classifications to enable cross-source analysis.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">9</div>
+                        <div class="step-content">
+                            <h4>Deduplicate Across Sources &amp; Publications</h4>
+                            <p>Identified and merged duplicate citations appearing across multiple databases using case numbers, document titles, and filing dates. Also deduplicated within publications where the same document cited the same Sedona work multiple times.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">10</div>
+                        <div class="step-content">
+                            <h4>Map to Working Group Structure</h4>
+                            <p>Tagged each publication to its corresponding Sedona Conference Working Group (WG1 through WG13) and computed aggregate statistics including quarterly and yearly citation counts, year-over-year growth rates, and publication rankings by document type.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step-item">
+                        <div class="step-number">11</div>
+                        <div class="step-content">
+                            <h4>Generate Interactive Dashboard</h4>
+                            <p>Transformed the final dataset into a self-contained HTML dashboard using Python for data processing and Plotly.js for visualization. All data is embedded inline, requiring no external APIs or databases at runtime.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-meta">
-            Generated <span id="gen-date"></span>
+            &copy; 2026 <a href="https://transparentlabs.org" style="color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--border-light);">Transparent Labs</a>. All rights reserved.
         </div>
     </footer>
     
@@ -1168,9 +1238,6 @@
         }
         
         // Generation date
-        if (document.getElementById('gen-date')) {
-            document.getElementById('gen-date').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        }
         
         // Section counts
         if (document.getElementById('filings-count')) {
@@ -1181,6 +1248,40 @@
         }
         if (document.getElementById('academic-count')) {
             document.getElementById('academic-count').textContent = data.stats.academic.toLocaleString() + ' papers';
+        }
+        
+        // Source breakdown table
+        if (document.getElementById('source-breakdown-table')) {
+            const recapCount = data.stats.filings - data.stats.westlaw;
+            const sources = [
+                { name: 'CourtListener / RECAP', type: 'Court Filings', count: recapCount, color: '#6b5a9e' },
+                { name: 'Westlaw', type: 'Opinions, Filings & Expert Materials', count: data.stats.westlaw, color: '#F26522' },
+                { name: 'SSRN / Google Scholar', type: 'Academic Papers', count: data.stats.academic, color: '#5d4a99' }
+            ];
+            const total = sources.reduce((s, r) => s + r.count, 0);
+            let srcHtml = `
+                <thead>
+                    <tr style="border-bottom: 2px solid #e8e6e1;">
+                        <th style="text-align:left; padding: 0.3rem 0.5rem; font-size: 0.6rem; color: var(--text-muted);">SOURCE</th>
+                        <th style="text-align:left; padding: 0.3rem 0.5rem; font-size: 0.6rem; color: var(--text-muted);">DOCUMENT TYPE</th>
+                        <th style="text-align:right; padding: 0.3rem 0.5rem; font-size: 0.6rem; color: var(--text-muted);">COUNT</th>
+                    </tr>
+                </thead><tbody>`;
+            sources.forEach(s => {
+                srcHtml += `<tr style="border-bottom: 1px solid #f0eeea;">
+                    <td style="padding: 0.3rem 0.5rem; font-weight: 500;">
+                        <span style="display:inline-block; width:6px; height:6px; background:${s.color}; border-radius:2px; margin-right:4px;"></span>${s.name}
+                    </td>
+                    <td style="padding: 0.3rem 0.5rem; color: var(--text-muted);">${s.type}</td>
+                    <td style="text-align:right; padding: 0.3rem 0.5rem; font-family: 'IBM Plex Mono', monospace; font-weight: 500;">${s.count.toLocaleString()}</td>
+                </tr>`;
+            });
+            srcHtml += `<tr style="border-top: 2px solid #e8e6e1;">
+                <td style="padding: 0.3rem 0.5rem; font-weight: 600;" colspan="2">Total</td>
+                <td style="text-align:right; padding: 0.3rem 0.5rem; font-family: 'IBM Plex Mono', monospace; font-weight: 600;">${total.toLocaleString()}</td>
+            </tr>`;
+            srcHtml += '</tbody>';
+            document.getElementById('source-breakdown-table').innerHTML = srcHtml;
         }
         
         // Publications Table
